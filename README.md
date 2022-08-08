@@ -11,11 +11,67 @@
 </details>-->
 
 <details>
-<summary>Easy Problem</summary>
+<summary>84. Largest Rectangle in Histogram</summary>
+https://leetcode.com/problems/largest-rectangle-in-histogram/
 <p>
-
+   
 ```python
-   print("Hello World")
+import math
+class Solution:
+    #Function for finding left most smallest
+    def leftSmallest(self,height,length):
+        left_smallest_height=[]
+        stack=[]
+        for i in range(length):
+            if stack==[]:
+                left_smallest_height.append(-1)
+                stack.append(i)
+            else:
+                if height[stack[-1]]<height[i]:
+                    left_smallest_height.append(stack[-1])
+                    stack.append(i)
+                else:
+                    while stack!=[] and height[stack[-1]]>=height[i]:
+                        stack.pop()
+                    if stack==[]:
+                        left_smallest_height.append(-1)
+                    else:
+                        left_smallest_height.append(stack[-1])
+                    stack.append(i)
+        return left_smallest_height
+    
+    #Function for finding right most smallest
+    def rightSmallest(self,height,length):
+        right_smallest_height=[]
+        stack=[]
+        for i in range(length-1,-1,-1):
+            if stack==[]:
+                right_smallest_height.append(length)
+                stack.append(i)
+            else:
+                if height[stack[-1]]<height[i]:
+                    right_smallest_height.append(stack[-1])
+                    stack.append(i)
+                else:
+                    while stack!=[] and height[stack[-1]]>=height[i]:
+                        stack.pop()
+                    if stack==[]:
+                        right_smallest_height.append(length)
+                    else:
+                        right_smallest_height.append(stack[-1])
+                    stack.append(i)
+        return right_smallest_height
+    
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        length=len(heights)
+        left_smll=self.leftSmallest(heights,length)
+        right_smll=self.rightSmallest(heights,length)
+        mx=-math.inf
+        for i in range(length):
+            #Calculating length of histogram by subtracting left a right smallest index minus one and multiplying by its heights
+            mx=max(mx,(right_smll[length-1-i]-left_smll[i]-1)*heights[i])
+        return mx
+        
 ```
 
 </p>
