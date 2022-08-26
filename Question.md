@@ -5,8 +5,15 @@
 - Every things can be divided into small functions hence called as Functional Programming
 
 #### Q-2:Is Python an Interpreted Language?
-<b>Ans:</b> Python Source Code->Compiler->Binary Code->(PVM Python Virtual Machine)Just in time compiler->Machine Code
+<b>Ans:</b>  Python Source Code->Compiler->Binary Code->(PVM Python Virtual Machine)Just in time compiler->Machine Code
     Interpreter Convert binary Code into the machine code and wait for next command by operating System.
+```mermaid
+graph TD;
+    Python_Source_Code-->Compiler;
+    Compiler-->Binary_Code;
+    Binary_Code-->PVM_Python_Virtual_Machine_Just_in_time_compiler;
+    PVM_Python_Virtual_Machine_Just_in_time_compiler-->Machine_Code;
+```
 
 #### Q-3:What is the difference between list and tuple?
 <b>Ans:</b> In both we can store Heterogeneous, Indexing, Silicing Operator.
