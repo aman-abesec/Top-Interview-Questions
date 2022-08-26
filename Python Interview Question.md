@@ -39,7 +39,7 @@ x=5
 y=5
 z=9
 print(x is y)#True
-print(x is z)#True
+print(x is z)#False
 ```
 
 #### Q-6:What is Monkey Patching?
