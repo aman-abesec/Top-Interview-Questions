@@ -17,8 +17,15 @@ graph TD;
 
 #### Q-3:What is the difference between list and tuple?
 <b>Ans:</b> In both we can store Heterogeneous, Indexing, Silicing Operator.
-- list-[],mutable,more memmory consuming.
-- Tuple-(),immutable,(index,count),less memmory consuming.
+- list
+    - Representation[]
+    - mutable
+    - more memmory consuming.
+- Tuple
+    - Representation ()
+    - immutable
+    -  Function used index,count.
+    - less memmory consuming.
 
 #### Q-4:How is memory managed in python?
 <b>Ans:</b> Reference Variable in Stack Memory and Object in Private Heap Space
