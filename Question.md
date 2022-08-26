@@ -1,11 +1,11 @@
 #### Q-1:What kind of language is Python?
-Ans:Python is a general purpose ,Scripting Language.It is Dynamically Typed Object Oriented which also support Functional Programming.
+Ans: Python is a general purpose ,Scripting Language.It is Dynamically Typed Object Oriented which also support Functional Programming.
 - Dynamically Typed :Type of variable and Expression define during run Time.
 - Every things in python is a Object
 - Every things can be divided into small functions hence called as Functional Programming
 
 #### Q-2:Is Python an Interpreted Language?
-Ans:Python Source Code->Compiler->Binary Code->(PVM Python Virtual Machine)Just in time compiler->Machine Code
+Ans: Python Source Code->Compiler->Binary Code->(PVM Python Virtual Machine)Just in time compiler->Machine Code
     Interpreter Convert binary Code into the machine code and wait for next command by operating System.
 
 #### Q-3:What is the difference between list and tuple?
