@@ -285,3 +285,25 @@ SELECT name FROM emp
 SELECT name FROM emp
   WHERE name NOT LIKE 'A%M';
  ```
+
+#### AND & OR
+     ANd and OR operator is used with WHERE clause for precious filtration
+     of data from the database tables by combining more than one condition along
+     with select, update and delete queries.
+
+    Defination: The and result true only when all the conjunction of condition
+    specified after the where clause are satisfied.
+```SQL
+SELECT col1, col2,..........
+FROM table_name
+WHERE condition1 AND condition2 AND condition3.....;
+```
+
+    Defination: Among multiple condition specified in the WHERE clause
+    the transaction is performed if any of the condition becomes
+    true.
+```SQL
+SELECT col1,col2,...........
+FROM table_name
+WHERE condition1 OR condition2 OR condition3......;
+```
