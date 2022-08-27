@@ -10,6 +10,17 @@
     Example: Grant, Revoke
 
 #### CREATE
+    CREATE command is used to create Table;
+
+    CREATE TABLE table_name(
+    col1 datatype1(size),
+    col2 datatype2(size),
+    col3 datatype3(size),
+    .
+    .
+    coln datatypen(size),
+    PRIMARY KEY(one or more Column)
+    );
 ``` SQL
 CREATE TABLE student(
     student_id VARCHAR(20) PRIMARY KEY,
@@ -17,7 +28,6 @@ CREATE TABLE student(
     student_age INT
     );
 ```
-
 ``` SQL
 CREATE TABLE student(
     Roll_No INT PRIMARY KEY,
@@ -26,6 +36,23 @@ CREATE TABLE student(
     Age INT
     );
 ```
+##### DESC is used to know the structure of the table.
+```SQL
+DESC table_name;
+
+CREATE TABLE emp as (SELECT * FROM emp1);
+CREATE TABLE emp (SELECT name,class,age FROM emp1);
+CREATE TABLE emp (SELECT * FROM emp1 where deptno=10);
+
+CREATE TABLE emp as (SELECT ename,job,sal FROM emp1,dept);
+```
+
+### IMPORTANT
+    NO data will be copy only structure will be copy
+``` SQL
+CREATE TABLE emp
+as (SELECT * FROM emp1 where 1=2);
+``` 
 
 #### ALTER & DROP
     Alter used with combination of (ADD and DROP);
