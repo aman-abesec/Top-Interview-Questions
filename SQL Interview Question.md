@@ -4,7 +4,7 @@
     Example: Create, Drop, Alter
 ##### 2-DQL(Data query language)
     Example: Select
-##### 3-DDML(Data Maniplution language)
+##### 3-DML(Data Maniplution language)
     Example: Update, Insert, Delete
 ##### 4-DCL(Data Control language)
     Example: Grant, Revoke
@@ -48,10 +48,10 @@ CREATE TABLE emp as (SELECT ename,job,sal FROM emp1,dept);
 ```
 
 ### IMPORTANT
-    NO data will be copy only structure will be copy
 ``` SQL
-CREATE TABLE emp
-as (SELECT * FROM emp1 where 1=2);
+# NO data will be copy only structure will be copy
+
+CREATE TABLE emp as (SELECT * FROM emp1 where 1=2);
 ``` 
 
 #### ALTER & DROP
