@@ -229,7 +229,7 @@ INSERT INTO sample (SELECT * FROM emp WHERE sal BETWEEN 2000 AND 3000);
 ```SQL
 DELETE FROM emp WHERE ENAME="aMAN";
 
-DELETE FROM emp;//dELETE oNLY data not Table
+DELETE FROM emp;#Delete only data not Table
 ```
    ### IMPORTANT
     Difference B/W Truncate And Delete
