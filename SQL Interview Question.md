@@ -125,3 +125,48 @@ enter value for l_name :Singh
 INSERT INTO table2 SELECT * FROM table1;
 INSERT INTO table2(name) SELECT name FROM table1;
 ```
+
+#### UPDATE
+    UPDATE table_name
+      SET col1=val1,col2=val2,...........
+      WHERE condition;
+
+```SQL
+UPDATE emp
+  SET com=300
+  WHERE sal<3000;
+
+UPDATE emp
+  SET sal=5000,com=300
+  WHERE job="ANALYST";
+
+UPDATE emp
+  SET sal=5000;
+  
+# UPDATING one table to another table
+UPDATE emp
+  set job=(SELECT dname FROM dept
+  WHERE rownum=1)
+```
+
+#### BETWEEN
+    BETWEEN condition allows you to  easily test the condition in (inclusive)
+    range within the expression;
+
+    It can be used with SELECT,INSRT,UPDATE or DELETE statement.
+```SQL
+SELECT * FROM emp
+  WHERE sal BETWEEN 2000 AND 3000;
+
+SELECT * FROM emp
+  WHERE sal>=2000 AND sal<=3000;
+
+SELECT * FROM emp
+WHERE hiredate BETWEEN TO_DATE('1981/04/02','yyyy/mm/dd')
+AND TO_DATE('1981/06/09','yyyy/mm/dd')
+
+SELECT * FROM emp
+  WHERE sal NOT BETWEEN 2000 AND 3000;
+
+INSERT INTO sample (SELECT * FROM emp WHERE sal BETWEEN 2000 AND 3000);
+```
