@@ -28,6 +28,32 @@ CREATE TABLE student(
 ```
 
 #### ALTER & DROP
+    Alter used with combination of (ADD and DROP);
+    Used for changes at column level like constraint changing, renaming one
+    column changing data type size;
+
+    ALTER TABLE table_name ADD(column_name datatype);
+```SQL
+ALTER TABLE emp ADD(Address VARCHAR(15));
+ALTER TABLE emp ADD(DOB DATE,FATHERNAME VARCHAR(20),MOTHERNAME VARCHAR(20),Allowness NUMBER(4));
+
+ALTER PRIMARY KEY(empno);
+
+ALTER TABLE emp ADD(Gender CHAR(1) DEFAULT 'F');
+```
+
+#### DROP
+    DROP is used to delete one or more existing column.
+    - DROP constraint
+    - DROP a single column
+    - DROP multiple column
+```SQL
+ALTER TABLE DROP(Gender);
+ALTER TABLE emp DROP(DOB,FATHERNAME,MOTHERNAME,Allowness);
+
+ALTER TABLE emp DROP constraint Primary_id
+``` 
+
 ``` SQL
 ALTER TABLE ADD aaddress VARCHAR(500);
 ALTER TABLE DROP aaddress;
@@ -182,3 +208,53 @@ DELETE FROM emp;//dELETE oNLY data not Table
     Difference B/W Truncate And Delete
     -DATA CAN NOT BE RESTORED BY TRUNCATE wHILE RESTORE BY DELETE
     -WHERE CONDITION CAN APPLY IN dELETE BUT NOT IN TRUNCATE
+
+#### MODIFY
+    MODIFY is used to change the existing column or the size of
+    the data type of the existing column.
+
+    ALTER TABLE Table_name MODIFY(column_name datatype);
+```SQL
+ALTER TABLE emp MODIFY(Address VARCHAR(75));
+
+ALTER TABLE emp MODIFY(Address VARCHAR(75),DOM INT);
+``` 
+   ### Important
+    -You can increase or Decrease the length by any value
+    But you can decreaase the value at largest length of value.
+```SQL
+ALTER TABLE table_name RENAME
+  old_column_name TO new_column_name;
+
+ALTER TABLE emp RENAME COLUMN
+  Address TO Location1;
+```
+
+#### LIKE
+    Like operator is used to search specified pattern in the data
+    and retrive the record when the pattern is matched;
+    'a%' match string starting with 'a';
+    '%a' match string ending with 'a';
+    'a%z' match string starting with 'a' and ending with 'z';
+    '%ab%' match string which contain sub string 'ab';
+    '_ab' match string which contain 'ab' at second position from starting.
+    'ab_' match string which contain 'ab' at second position from ending.
+    'a__'
+
+```SQL
+SELECT * FROM emp
+  WHERE LIKE 'B%';
+
+'%M%' Ex:-MAN,AMAN;
+
+#  Name of length Five
+SELECT name FROM emp
+  WHERE name LIKE '_____';
+
+# Name starting with A end with N 
+SELECT name FROM emp
+  WHERE name LIKE 'A%M';
+
+SELECT name FROM emp
+  WHERE name NOT LIKE 'A%M';
+ ```
