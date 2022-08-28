@@ -118,14 +118,6 @@ INSERT INTO student(student_id,student_name) VALUES("3a","Tripti Singh");SQL : T
     INTO mytable(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
     INTO mytable(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
     SELECT * FROM dual;
-    
-```SQL
-INSERT ALL
-INTO mytable1(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
-INTO mytable1(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
-INTO mytable2(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
-SELECT * FROM dual;
-```
 
 #### CREATE
 ``` SQL
