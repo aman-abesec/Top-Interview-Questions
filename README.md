@@ -45,7 +45,7 @@ class Solution:
 
 <details>
 <summary>Alien Dictionary</summary>
-https://practice.geeksforgeeks.org/problems/alien-dictionary/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions
+<a href="https://practice.geeksforgeeks.org/problems/alien-dictionary/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions">Problem</a>
 <p>
 
 ```python
