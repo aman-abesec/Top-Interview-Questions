@@ -85,8 +85,8 @@ class Solution:
 </details>
 
 <details>
-<summary>297. Serialize and Deserialize Binary Tree</summary>
-  https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+<summary>Serialize and Deserialize Binary Tree</summary>
+   <a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/">Problem</a>
 <p>
 
 ```python
@@ -137,7 +137,7 @@ class Solution:
 
 <details>
 <summary>84. Largest Rectangle in Histogram</summary>
-https://leetcode.com/problems/largest-rectangle-in-histogram/
+   <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/">Problem</a>
 <p>
    
 ```python
@@ -204,7 +204,7 @@ class Solution:
 
 <details>
 <summary>42. Trapping Rain Water</summary>
-https://leetcode.com/problems/trapping-rain-water/
+   <a href="https://leetcode.com/problems/trapping-rain-water/">Problem</a>
 <p>
 
 ```python
