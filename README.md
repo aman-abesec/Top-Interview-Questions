@@ -10,6 +10,46 @@
 </p>
 </details>-->
 
+<details>
+<summary>Alien Dictionary</summary>
+https://practice.geeksforgeeks.org/problems/alien-dictionary/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions
+<p>
+
+```python
+   class Solution:
+    def findOrder(self,dict, N, K):
+        def dfs(s,arr,stack,visited):
+            visited[s]=1
+            for v in arr[s]:
+                if visited[v]!=1:
+                    dfs(v,arr,stack,visited)
+            stack.append(s)
+                
+        def solve(dict,N,K):
+            u=[[] for _ in range(K)]
+            for i in range(N-1):
+                w1=dict[i]
+                w2=dict[i+1]
+                for k in range(min(len(w1),len(w2))):
+                    if w1[k]!=w2[k]:
+                        u[ord(w1[k])-ord('a')].append(ord(w2[k])-ord('a'))
+                        break
+            s=''
+            visited=[0 for _ in range(K)]
+            # print(u)
+            for i in range(K):
+                if visited[i]==0:
+                    stack=[]
+                    dfs(i,u,stack,visited)
+                    while stack:
+                        s+=chr(ord('a')+stack.pop(0))
+            # print(s)
+            return s[::-1]
+        return solve(dict,N,K)
+```
+
+</p>
+</details>
 
 <details>
 <summary>297. Serialize and Deserialize Binary Tree</summary>
