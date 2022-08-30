@@ -16,7 +16,7 @@
 <p>
 
 ```python
-   head=None
+head=None
 prev=None
 class Solution:
     def bToDLL(self,root):
