@@ -11,6 +11,39 @@
 </details>-->
 
 <details>
+<summary>Binary Tree to DLL</summary>
+ <a href="https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions">Problem</a>
+<p>
+
+```python
+   head=None
+prev=None
+class Solution:
+    def bToDLL(self,root):
+        def solve(root):
+            global head
+            global prev
+            if root==None:return 
+            solve(root.left)
+            if prev==None:
+                head=root
+            if prev!=None:
+                root.left=prev
+                prev.right=root
+            prev=root
+            solve(root.right)
+        global head
+        global prev
+        head=None
+        prev=None
+        solve(root)
+        return head
+```
+
+</p>
+</details>
+
+<details>
 <summary>Alien Dictionary</summary>
 https://practice.geeksforgeeks.org/problems/alien-dictionary/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions
 <p>
