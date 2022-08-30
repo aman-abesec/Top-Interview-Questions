@@ -136,7 +136,7 @@ class Solution:
 
 
 <details>
-<summary>84. Largest Rectangle in Histogram</summary>
+<summary>Largest Rectangle in Histogram</summary>
    <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/">Problem</a>
 <p>
    
@@ -203,7 +203,7 @@ class Solution:
 </details>
 
 <details>
-<summary>42. Trapping Rain Water</summary>
+<summary>Trapping Rain Water</summary>
    <a href="https://leetcode.com/problems/trapping-rain-water/">Problem</a>
 <p>
 
