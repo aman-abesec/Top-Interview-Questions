@@ -11,6 +11,40 @@
 </details>-->
 
 <details>
+<summary>Word Ladder</summary>
+<a href="https://leetcode.com/problems/word-ladder/">Problem</a>
+<p>
+
+```python
+  from collections import deque
+  class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        q=deque()
+        st=set(wordList)
+        q.append(beginWord)
+        count=0
+        l=len(beginWord)
+        while q:
+            for k in range(len(q)):
+                word=q.popleft()
+                if word == endWord:return count+1
+                else:
+                    for k in range(l):
+                        for i in range(26):
+                            new_word=word[:k]+chr(ord('a')+i)+word[k+1:]
+                            if new_word in st:
+                                q.append(new_word)
+                                st.discard(new_word)
+            count+=1
+        return 0
+                        
+            
+```
+
+</p>
+</details>
+
+<details>
 <summary>Binary Tree to DLL</summary>
  <a href="https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions">Problem</a>
 <p>
