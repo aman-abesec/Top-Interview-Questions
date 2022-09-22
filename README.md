@@ -81,6 +81,43 @@ class Solution:
 <summary>Alien Dictionary</summary>
 <a href="https://practice.geeksforgeeks.org/problems/alien-dictionary/1?page=1&company[]=Amazon&curated[]=5&curated[]=6&sortBy=submissions">Problem</a>
 <p>
+   
+ ```python
+   
+ #User function Template for python3
+from collections import deque
+class Solution:
+    def findOrder(self,dict, N, K):
+        def toposort(K,adj):
+            result=""
+            q=deque()
+            ind=[0 for _ in range(K)]
+            for i in range(K):
+                for v in adj[i]:
+                    ind[v]+=1
+            for i in range(K):
+                if ind[i]==0:
+                    q.append(i)
+            while q:
+                u=q.popleft()
+                # print(chr(ord('a')+u))
+                result+=chr(ord('a')+u)
+                for v in adj[u]:
+                    ind[v]-=1
+                    if ind[v]==0:
+                        q.append(v)
+            return result
+                    
+        adj=[[] for _ in range(K)]
+        for i in range(N-1):
+            w1=dict[i]
+            w2=dict[i+1]
+            for j in range(min(len(w1),len(w2))):
+                if w1[j]!=w2[j]:
+                    adj[ord(w1[j])-ord('a')].append(ord(w2[j])-ord('a'))
+                    break
+        return toposort(K,adj)
+ ```
 
 ```python
    class Solution:
