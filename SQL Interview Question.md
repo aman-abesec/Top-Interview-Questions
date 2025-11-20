@@ -102,6 +102,31 @@ SELECT * FROM student WHERE dept_no=20;
 SELECT ename,sal*12 AS Annual_sal FROM emp;
 SELECT ename,empno,dname,loc FROM emp,dept;
 ```
+```SQL
+SELECT TOP 3 * FROM emp;
+```
+#### ORDER BY
+``` SQL
+SELECT * FROM student ORDER BY Score ASC;
+```
+``` SQL
+SELECT * FROM student ORDER BY Score DESC;
+```
+``` SQL
+SELECT * FROM student ORDER BY Score DESC, Country DESC;
+```
+
+#### GROUP BY
+    You can only print the data that are used for groupby(like Country) or Agg(like score)
+``` SQL
+SELECT Country, SUM(Score) AS Total_score FROM student GROUP BY Country;
+```
+
+#### HAVING
+    Filter data after aggregation can be used only with GROUP BY
+``` SQL
+SELECT Country, SUM(Score) AS Total_score FROM student GROUP BY Country HAVING SUM(Score) > 800;
+```
 
 #### INSERT
 ``` SQL
@@ -298,4 +323,78 @@ WHERE condition1 AND condition2 AND condition3.....;
 SELECT col1,col2,...........
 FROM table_name
 WHERE condition1 OR condition2 OR condition3......;
+```
+
+#### WHERE
+- Comparison operators
+        =
+        <> =!
+        >
+        >=
+        <
+        <=
+- Logical Operators
+    - AND
+    - OR
+    - NOT
+- Range Operator
+    - BETWEEN
+- Membership Operator
+    - IN
+    - NOT IN
+- Search Operator
+    - LIKE
+
+#### Cobining Data
+    JOINS : joining side by side(Key column)
+        INNER Join
+        FULL Join
+        Left Join
+        Right Join
+    SET Operators : Joing row-wise(same columns)
+        UNION
+        UNION ALL
+        EXCEPT(Minus)
+        INTERSECT
+##### INNER JOIN
+    Return Only common data
+```SQL
+SELECT * FROM A INNER JOIN B ON A.key = B.key;
+```
+##### LEFT JOIN
+    Return All rows from left columns and matching from right.
+```SQL
+SELECT * FROM A LEFT JOIN B ON A.key = B.key;
+```
+##### RIGHT JOIN
+    Return All rows from right columns and matching from left.
+```SQL
+SELECT * FROM A RIGHT JOIN B ON A.key = B.key;
+```
+##### LEFT ANTI JOIN
+    Return All rows from left columns that has no match in Right.
+```SQL
+SELECT * FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NOT NULL;
+```
+##### RIGHT ANTI JOIN
+    Return All rows from right columns that has no match in left.
+```SQL
+SELECT * FROM A RIGHT JOIN B ON A.key = B.key WHERE A.key IS NOT NULL;
+```
+##### FULL ANTI JOIN
+    Return All rows from that don't match in either tables.
+```SQL
+SELECT * FROM A FULL JOIN B ON A.key = B.key WHERE A.key IS NULL OR B.key IS NULL;
+```
+##### CROSS Join
+    Combines Every row from left with every row from right.
+```SQL
+SELECT * FROM A CROSS JOIN B;
+```
+#### Practice 
+    Executiong Order
+    FROM -> WHRER -> GROUP BY -> HAVING -> SELECT DISTINCT -> ORDER BY -> TOP
+``` SQL
+-- Top # students with the highest Score
+SELECT TOP 3 * FROM Student ORDER BY score DESC;
 ```
