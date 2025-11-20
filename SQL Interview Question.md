@@ -391,6 +391,59 @@ SELECT * FROM A FULL JOIN B ON A.key = B.key WHERE A.key IS NULL OR B.key IS NUL
 ```SQL
 SELECT * FROM A CROSS JOIN B;
 ```
+
+#### SET Operation
+> Set Operator Can be used almost in all clauses  WHERE | JOIN | GROUP BY | HAVING
+> ORDER BY is allowed only once at the end of query.
+> No. of col must be same in each query.
+> Data types of col in each qury must be compatibles.
+> The col names in the result set are determine by the col names specisfied in the first query.
+
+- UNION
+    Returns all district rows from both queries.
+    Remove duplicates rows from the result
+```SQL
+SELECT f_name,l_name FROM student;
+UNION
+SELECT f_name,l_name FROM teacher;
+```
+- UNION ALL
+    Returns all rows from both queries including duplicates.
+```SQL
+SELECT f_name,l_name FROM student;
+UNION ALL
+SELECT f_name,l_name FROM teacher;
+```
+- EXCEPT
+    Returns all distinct rows from first query that are not found in the second query.
+```SQL
+SELECT f_name,l_name FROM student;
+EXCEPT
+SELECT f_name,l_name FROM teacher;
+```
+
+
+### Functions
+    A built in sql code.
+    > Accepts an input value.
+    > Process it
+    > Returns an output value
+- Single Row function
+      LOWER()
+      STRING fun, Numeric fun, Date and Time fun, Null fun
+    - String
+          - Manipulation : CONCAT,UPPER,LOWER,TRIM,REPLACE
+          - Calculation : Len
+          - Extrraction : left, right,substring
+    - Numeric : ABS,ROUND
+    - Date and Time : GETDATE():DAY<MONTH<YEAR<DATEPART<DATENAME<DATETRUNC<EOMONTH<FORMAT<CONVERT<CAST<DATEADD<DATEDIFF<ISDATE
+    - WINDOW : LAG
+- Multi Row Function
+      SUM()
+      Aggregate,Window
+- Nested Function
+      LOWER(LEFT("AMAN",2))
+
 #### Practice 
     Executiong Order
     FROM -> WHRER -> GROUP BY -> HAVING -> SELECT DISTINCT -> ORDER BY -> TOP
