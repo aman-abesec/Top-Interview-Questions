@@ -1,453 +1,533 @@
-### <b>SQL : </b> There are four type of sub-language
+#  SQL 
 
-##### 1-DDL(Data Defination language)
-    Example: Create, Drop, Alter
-##### 2-DQL(Data query language)
-    Example: Select
-##### 3-DML(Data Maniplution language)
-    Example: Update, Insert, Delete
-##### 4-DCL(Data Control language)
-    Example: Grant, Revoke
+## 1. SQL Sub-Languages
+SQL has **four main sub-languages**:
 
-#### CREATE
-    CREATE command is used to create Table;
+### **1.1 DDL – Data Definition Language**
+Used to define or modify database structures.  
+**Examples:** `CREATE`, `DROP`, `ALTER`, `TRUNCATE`
 
-    CREATE TABLE table_name(
-    col1 datatype1(size),
-    col2 datatype2(size),
-    col3 datatype3(size),
-    .
-    .
-    coln datatypen(size),
-    PRIMARY KEY(one or more Column)
-    );
-``` SQL
-CREATE TABLE student(
+### **1.2 DQL – Data Query Language**
+Used for querying data.  
+**Examples:** `SELECT`
+
+### **1.3 DML – Data Manipulation Language**
+Used to modify table records.  
+**Examples:** `INSERT`, `UPDATE`, `DELETE`
+
+### **1.4 DCL – Data Control Language**
+Used to manage permissions.  
+**Examples:** `GRANT`, `REVOKE`
+
+---
+
+# 2. DDL – CREATE, ALTER, DROP
+
+## **2.1 CREATE TABLE**
+```sql
+CREATE TABLE student (
     student_id VARCHAR(20) PRIMARY KEY,
-    student_name VARCHAR(20) NOT NULL,
+    student_name VARCHAR(50) NOT NULL,
     student_age INT
-    );
-```
-``` SQL
-CREATE TABLE student(
-    Roll_No INT PRIMARY KEY,
-    F_name VARCHAR(20) NOT NULL,
-    L_name VARCHAR(20) NOT NULL,
-    Age INT
-    );
-```
-##### DESC is used to know the structure of the table.
-```SQL
-DESC table_name;
-
-CREATE TABLE emp as (SELECT * FROM emp1);
-CREATE TABLE emp (SELECT name,class,age FROM emp1);
-CREATE TABLE emp (SELECT * FROM emp1 where deptno=10);
-
-CREATE TABLE emp as (SELECT ename,job,sal FROM emp1,dept);
+);
 ```
 
-### IMPORTANT
-``` SQL
-# NO data will be copy only structure will be copy
-
-CREATE TABLE emp as (SELECT * FROM emp1 where 1=2);
-``` 
-
-#### ALTER & DROP
-    Alter used with combination of (ADD and DROP);
-    Used for changes at column level like constraint changing, renaming one
-    column changing data type size;
-
-    ALTER TABLE table_name ADD(column_name datatype);
-```SQL
-ALTER TABLE emp ADD(Address VARCHAR(15));
-ALTER TABLE emp ADD(DOB DATE,FATHERNAME VARCHAR(20),MOTHERNAME VARCHAR(20),Allowness NUMBER(4));
-
-ALTER PRIMARY KEY(empno);
-
-ALTER TABLE emp ADD(Gender CHAR(1) DEFAULT 'F');
+Another example:
+```sql
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    age INT
+);
 ```
 
-#### DROP
-    DROP is used to delete one or more existing column.
-    - DROP constraint
-    - DROP a single column
-    - DROP multiple column
-```SQL
-ALTER TABLE DROP(Gender);
-ALTER TABLE emp DROP(DOB,FATHERNAME,MOTHERNAME,Allowness);
-
-ALTER TABLE emp DROP constraint Primary_id
-``` 
-
-``` SQL
-ALTER TABLE ADD aaddress VARCHAR(500);
-ALTER TABLE DROP aaddress;
+### Copy Table Structure + Data
+```sql
+CREATE TABLE emp2 AS SELECT * FROM emp1;
 ```
 
-#### SELECT
-``` SQL
+### Copy Only Structure (No Data)
+```sql
+CREATE TABLE emp2 AS SELECT * FROM emp1 WHERE 1 = 2;
+```
+
+---
+
+## **2.2 ALTER TABLE**
+
+### Add Column
+```sql
+ALTER TABLE emp ADD (address VARCHAR(100));
+```
+
+### Add Multiple Columns
+```sql
+ALTER TABLE emp
+ADD (dob DATE, father_name VARCHAR(20), mother_name VARCHAR(20));
+```
+
+### Modify Column
+```sql
+ALTER TABLE emp MODIFY (address VARCHAR(200));
+```
+
+### Rename Column
+```sql
+ALTER TABLE emp RENAME COLUMN address TO location;
+```
+
+---
+
+## **2.3 DROP**
+Deletes **objects**.
+
+### Drop Column
+```sql
+ALTER TABLE emp DROP COLUMN dob;
+```
+
+### Drop Multiple Columns
+```sql
+ALTER TABLE emp DROP (father_name, mother_name);
+```
+
+### Drop Constraint
+```sql
+ALTER TABLE emp DROP CONSTRAINT primary_id;
+```
+
+---
+
+# 3. SELECT (DQL)
+
+### Basic Queries
+```sql
 SELECT * FROM student;
-SELECT f_name,l_name FROM student;
-SELECT DISTINCT(f_name) FROM student;
-SELECT * FROM student WHERE student_id>2;
-```
-``` SQL
-SELECT * FROM student;
-SELECT F_name,l_name FROM student;
-SELECT * FROM student WHERE dept_no=20;
-```
-```SQL
-SELECT ename,sal*12 AS Annual_sal FROM emp;
-SELECT ename,empno,dname,loc FROM emp,dept;
-```
-```SQL
-SELECT TOP 3 * FROM emp;
-```
-#### ORDER BY
-``` SQL
-SELECT * FROM student ORDER BY Score ASC;
-```
-``` SQL
-SELECT * FROM student ORDER BY Score DESC;
-```
-``` SQL
-SELECT * FROM student ORDER BY Score DESC, Country DESC;
+SELECT student_name, student_age FROM student;
+SELECT DISTINCT(student_name) FROM student;
 ```
 
-#### GROUP BY
-    You can only print the data that are used for groupby(like Country) or Agg(like score)
-``` SQL
-SELECT Country, SUM(Score) AS Total_score FROM student GROUP BY Country;
+### With WHERE
+```sql
+SELECT * FROM student WHERE student_age > 18;
 ```
 
-#### HAVING
-    Filter data after aggregation can be used only with GROUP BY
-``` SQL
-SELECT Country, SUM(Score) AS Total_score FROM student GROUP BY Country HAVING SUM(Score) > 800;
+### Column Alias
+```sql
+SELECT name, salary * 12 AS annual_salary FROM emp;
 ```
 
-#### INSERT
-``` SQL
-INSERT INTO student VALUES("1a","Aman Singh",20);
-INSERT INTO student VALUES("2a","Akash Singh",19);
-INSERT INTO student(student_id,student_name) VALUES("3a","Tripti Singh");SQL : There are four type of sub-language
+### TOP (SQL Server)
+```sql
+SELECT TOP 3 * FROM emp ORDER BY salary DESC;
 ```
 
-#### INSERT All
-    Used to add multiple rows with single insert statement.
+---
 
-    INSERT ALL
-    INTO mytable(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
-    INTO mytable(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
-    INTO mytable(col1,col2,.............coln) VALUES(expr1,expr2,..................exprn)
-    SELECT * FROM dual;
-
-#### CREATE
-``` SQL
-CREATE TABLE student(
-    student_id VARCHAR(20) PRIMARY KEY,
-    student_name VARCHAR(20) NOT NULL,
-    student_age INT
-    );
+# 4. ORDER BY
+```sql
+SELECT * FROM student ORDER BY score ASC;
+SELECT * FROM student ORDER BY score DESC;
+SELECT * FROM student ORDER BY score DESC, country ASC;
 ```
 
-``` SQL
-CREATE TABLE student(
-    Roll_No INT PRIMARY KEY,
-    F_name VARCHAR(20) NOT NULL,
-    L_name VARCHAR(20) NOT NULL,
-    Age INT
-    );
+---
+
+# 5. GROUP BY & HAVING
+
+### GROUP BY
+```sql
+SELECT country, SUM(score) AS total_score
+FROM student
+GROUP BY country;
 ```
 
-#### ALTER & DROP
-``` SQL
-ALTER TABLE ADD aaddress VARCHAR(500);
-ALTER TABLE DROP aaddress;
+### HAVING (after aggregation)
+```sql
+SELECT country, SUM(score) AS total_score
+FROM student
+GROUP BY country
+HAVING SUM(score) > 800;
 ```
 
-#### SELECT
-``` SQL
-SELECT * FROM student;
-SELECT f_name,l_name FROM student;
-SELECT DISTINCT(f_name) FROM student;
-SELECT * FROM student WHERE student_id>2;
+---
+
+# 6. INSERT
+
+### Insert All Columns
+```sql
+INSERT INTO student VALUES ('1a', 'Aman Singh', 20);
 ```
 
-##### INSERT
-``` SQL
-INSERT INTO student VALUES("1a","Aman Singh",20);
-INSERT INTO student VALUES("2a","Akash Singh",19);
-INSERT INTO student(student_id,student_name) VALUES("3a","Tripti Singh");
-```
-```SQL
-# Inserting at run time
-INSERT INTO student VALUES(&student_id,&f_name,&l_name);
-
-# Inserting at one By one
-enter value for student_id=1
-enter value for f_name :Aman
-enter value for l_name :Singh
-
-# Inserting one table to another table
-INSERT INTO table2 SELECT * FROM table1;
-INSERT INTO table2(name) SELECT name FROM table1;
+### Insert Selected Columns
+```sql
+INSERT INTO student (student_id, student_name)
+VALUES ('3a', 'Tripti Singh');
 ```
 
-#### UPDATE
-    UPDATE table_name
-      SET col1=val1,col2=val2,...........
-      WHERE condition;
+### Insert From Another Table
+```sql
+INSERT INTO table2
+SELECT * FROM table1;
+```
 
-```SQL
+---
+
+# 7. UPDATE
+
+```sql
 UPDATE emp
-  SET com=300
-  WHERE sal<3000;
+SET sal = 5000, com = 300
+WHERE job = 'ANALYST';
+```
 
+### Update using Subquery
+```sql
 UPDATE emp
-  SET sal=5000,com=300
-  WHERE job="ANALYST";
-
-UPDATE emp
-  SET sal=5000;
-  
-# UPDATING one table to another table
-UPDATE emp
-  set job=(SELECT dname FROM dept
-  WHERE rownum=1)
+SET job = (SELECT dname FROM dept WHERE ROWNUM = 1);
 ```
 
-#### BETWEEN
-    BETWEEN condition allows you to  easily test the condition in (inclusive)
-    range within the expression;
+---
 
-    It can be used with SELECT,INSRT,UPDATE or DELETE statement.
-```SQL
-SELECT * FROM emp
-  WHERE sal BETWEEN 2000 AND 3000;
+# 8. DELETE vs TRUNCATE
 
-SELECT * FROM emp
-  WHERE sal>=2000 AND sal<=3000;
+| Feature | DELETE | TRUNCATE |
+|--------|--------|-----------|
+| Removes | Rows | All Rows |
+| WHERE allowed | ✔ Yes | ❌ No |
+| Rollback allowed | ✔ Yes | ❌ No |
+| Speed | Slower | Faster |
+| Resets identity | ❌ No | ✔ Yes |
 
-SELECT * FROM emp
-WHERE hiredate BETWEEN TO_DATE('1981/04/02','yyyy/mm/dd')
-AND TO_DATE('1981/06/09','yyyy/mm/dd')
+---
 
-SELECT * FROM emp
-  WHERE sal NOT BETWEEN 2000 AND 3000;
-
-INSERT INTO sample (SELECT * FROM emp WHERE sal BETWEEN 2000 AND 3000);
+# 9. BETWEEN
+```sql
+SELECT * FROM emp WHERE sal BETWEEN 2000 AND 3000;
+SELECT * FROM emp WHERE hiredate BETWEEN '1981-04-02' AND '1981-06-09';
 ```
 
-#### DELETE
-    DELETE FROM table_name WHERE condition;
-```SQL
-DELETE FROM emp WHERE ENAME="aMAN";
+---
 
-DELETE FROM emp;#Delete only data not Table
-```
-   ### IMPORTANT
-    Difference B/W Truncate And Delete
-    -DATA CAN NOT BE RESTORED BY TRUNCATE wHILE RESTORE BY DELETE
-    -WHERE CONDITION CAN APPLY IN dELETE BUT NOT IN TRUNCATE
+# 10. LIKE (Pattern Matching)
 
-#### MODIFY
-    MODIFY is used to change the existing column or the size of
-    the data type of the existing column.
+| Pattern | Meaning |
+|---------|---------|
+| `'a%'` | Starts with a |
+| `'%a'` | Ends with a |
+| `'%ab%'` | Contains ab |
+| `'_ab'` | ab starting at position 2 |
+| `'a__'` | a followed by 2 letters |
 
-    ALTER TABLE Table_name MODIFY(column_name datatype);
-```SQL
-ALTER TABLE emp MODIFY(Address VARCHAR(75));
-
-ALTER TABLE emp MODIFY(Address VARCHAR(75),DOM INT);
-``` 
-   ### Important
-    -You can increase or Decrease the length by any value
-    But you can decreaase the value at largest length of value.
-```SQL
-ALTER TABLE table_name RENAME
-  old_column_name TO new_column_name;
-
-ALTER TABLE emp RENAME COLUMN
-  Address TO Location1;
+Examples:
+```sql
+SELECT * FROM emp WHERE name LIKE 'A%M';
+SELECT * FROM emp WHERE name NOT LIKE 'A%';
 ```
 
-#### LIKE
-    Like operator is used to search specified pattern in the data
-    and retrive the record when the pattern is matched;
-    'a%' match string starting with 'a';
-    '%a' match string ending with 'a';
-    'a%z' match string starting with 'a' and ending with 'z';
-    '%ab%' match string which contain sub string 'ab';
-    '_ab' match string which contain 'ab' at second position from starting.
-    'ab_' match string which contain 'ab' at second position from ending.
-    'a__'
+---
 
-```SQL
-SELECT * FROM emp
-  WHERE LIKE 'B%';
+# 11. AND / OR / NOT (Logical Operators)
 
-'%M%' Ex:-MAN,AMAN;
-
-#  Name of length Five
-SELECT name FROM emp
-  WHERE name LIKE '_____';
-
-# Name starting with A end with N 
-SELECT name FROM emp
-  WHERE name LIKE 'A%M';
-
-SELECT name FROM emp
-  WHERE name NOT LIKE 'A%M';
- ```
-
-#### AND & OR
-     ANd and OR operator is used with WHERE clause for precious filtration
-     of data from the database tables by combining more than one condition along
-     with select, update and delete queries.
-
-    Defination: The and result true only when all the conjunction of condition
-    specified after the where clause are satisfied.
-```SQL
-SELECT col1, col2,..........
-FROM table_name
-WHERE condition1 AND condition2 AND condition3.....;
+### Using AND
+```sql
+SELECT * FROM student
+WHERE country = 'India' AND score > 500;
 ```
 
-    Defination: Among multiple condition specified in the WHERE clause
-    the transaction is performed if any of the condition becomes
-    true.
-```SQL
-SELECT col1,col2,...........
-FROM table_name
-WHERE condition1 OR condition2 OR condition3......;
+### Using OR
+```sql
+SELECT * FROM student
+WHERE country = 'India' OR country = 'USA';
 ```
 
-#### WHERE
-- Comparison operators
-        =
-        <> =!
-        >
-        >=
-        <
-        <=
-- Logical Operators
-    - AND
-    - OR
-    - NOT
-- Range Operator
-    - BETWEEN
-- Membership Operator
-    - IN
-    - NOT IN
-- Search Operator
-    - LIKE
+---
 
-#### Cobining Data
-    JOINS : joining side by side(Key column)
-        INNER Join
-        FULL Join
-        Left Join
-        Right Join
-    SET Operators : Joing row-wise(same columns)
-        UNION
-        UNION ALL
-        EXCEPT(Minus)
-        INTERSECT
-##### INNER JOIN
-    Return Only common data
-```SQL
-SELECT * FROM A INNER JOIN B ON A.key = B.key;
-```
-##### LEFT JOIN
-    Return All rows from left columns and matching from right.
-```SQL
-SELECT * FROM A LEFT JOIN B ON A.key = B.key;
-```
-##### RIGHT JOIN
-    Return All rows from right columns and matching from left.
-```SQL
-SELECT * FROM A RIGHT JOIN B ON A.key = B.key;
-```
-##### LEFT ANTI JOIN
-    Return All rows from left columns that has no match in Right.
-```SQL
-SELECT * FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NOT NULL;
-```
-##### RIGHT ANTI JOIN
-    Return All rows from right columns that has no match in left.
-```SQL
-SELECT * FROM A RIGHT JOIN B ON A.key = B.key WHERE A.key IS NOT NULL;
-```
-##### FULL ANTI JOIN
-    Return All rows from that don't match in either tables.
-```SQL
-SELECT * FROM A FULL JOIN B ON A.key = B.key WHERE A.key IS NULL OR B.key IS NULL;
-```
-##### CROSS Join
-    Combines Every row from left with every row from right.
-```SQL
-SELECT * FROM A CROSS JOIN B;
+# 12. JOINS
+
+### INNER JOIN
+(Returns matching rows)
+```sql
+SELECT *
+FROM A INNER JOIN B
+ON A.id = B.id;
 ```
 
-#### SET Operation
-> Set Operator Can be used almost in all clauses  WHERE | JOIN | GROUP BY | HAVING
-> ORDER BY is allowed only once at the end of query.
-> No. of col must be same in each query.
-> Data types of col in each qury must be compatibles.
-> The col names in the result set are determine by the col names specisfied in the first query.
+### LEFT JOIN
+(Return all from left + matching from right)
+```sql
+SELECT *
+FROM A LEFT JOIN B
+ON A.id = B.id;
+```
 
-- UNION
-    Returns all district rows from both queries.
-    Remove duplicates rows from the result
-```SQL
-SELECT f_name,l_name FROM student;
+### RIGHT JOIN
+(Return all from right + matching from left)
+```sql
+SELECT *
+FROM A RIGHT JOIN B
+ON A.id = B.id;
+```
+
+### FULL OUTER JOIN
+```sql
+SELECT *
+FROM A FULL JOIN B
+ON A.id = B.id;
+```
+
+### Anti Joins
+Left Anti Join:
+```sql
+SELECT *
+FROM A
+LEFT JOIN B ON A.id = B.id
+WHERE B.id IS NULL;
+```
+
+---
+
+# 13. SET OPERATIONS
+
+| Operator | Description |
+|----------|-------------|
+| UNION | Distinct rows from both queries |
+| UNION ALL | All rows including duplicates |
+| EXCEPT / MINUS | Rows in first query not in second |
+| INTERSECT | Common records |
+
+Example:
+```sql
+SELECT f_name FROM student
 UNION
-SELECT f_name,l_name FROM teacher;
-```
-- UNION ALL
-    Returns all rows from both queries including duplicates.
-```SQL
-SELECT f_name,l_name FROM student;
-UNION ALL
-SELECT f_name,l_name FROM teacher;
-```
-- EXCEPT
-    Returns all distinct rows from first query that are not found in the second query.
-```SQL
-SELECT f_name,l_name FROM student;
-EXCEPT
-SELECT f_name,l_name FROM teacher;
+SELECT f_name FROM teacher;
 ```
 
+---
 
-### Functions
-    A built in sql code.
-    > Accepts an input value.
-    > Process it
-    > Returns an output value
-- Single Row function
-      LOWER()
-      STRING fun, Numeric fun, Date and Time fun, Null fun
-    - String
-          - Manipulation : CONCAT,UPPER,LOWER,TRIM,REPLACE
-          - Calculation : Len
-          - Extrraction : left, right,substring
-    - Numeric : ABS,ROUND
-    - Date and Time : GETDATE():DAY<MONTH<YEAR<DATEPART<DATENAME<DATETRUNC<EOMONTH<FORMAT<CONVERT<CAST<DATEADD<DATEDIFF<ISDATE
-    - WINDOW : LAG
-- Multi Row Function
-      SUM()
-      Aggregate,Window
-- Nested Function
-      LOWER(LEFT("AMAN",2))
+# 14. SQL FUNCTIONS
 
-#### Practice 
-    Executiong Order
-    FROM -> WHRER -> GROUP BY -> HAVING -> SELECT DISTINCT -> ORDER BY -> TOP
-``` SQL
--- Top # students with the highest Score
-SELECT TOP 3 * FROM Student ORDER BY score DESC;
+## String Functions
+- `UPPER()`, `LOWER()`, `CONCAT()`, `TRIM()`
+- `LEFT()`, `RIGHT()`, `SUBSTRING()`
+- `LENGTH()`
+
+## Numeric Functions
+- `ABS()`, `ROUND()`
+
+## Date Functions
+- `GETDATE()`, `DAY()`, `MONTH()`, `YEAR()`
+- `DATEADD()`, `DATEDIFF()`, `EOMONTH()`
+- `FORMAT()`, `CONVERT()`, `CAST()`
+
+## Aggregate Functions
+- `SUM()`, `COUNT()`, `MAX()`, `MIN()`, `AVG()`
+
+## Window Functions
+- `ROW_NUMBER()`, `RANK()`, `LAG()`, `LEAD()`
+
+---
+
+# 15. Query Execution Order (Very Important)
+
+| Order | Clause |
+|-------|--------|
+| 1 | FROM |
+| 2 | WHERE |
+| 3 | GROUP BY |
+| 4 | HAVING |
+| 5 | SELECT |
+| 6 | ORDER BY |
+| 7 | LIMIT / TOP |
+
+Example:
+```sql
+SELECT TOP 3 *
+FROM student
+WHERE score > 300
+GROUP BY country, score
+HAVING COUNT(*) > 1
+ORDER BY score DESC;
 ```
+
+---
+
+# 🔥 SQL Interview Questions + Answers
+
+### **Q1. What is the difference between WHERE and HAVING?**
+**WHERE** filters rows **before aggregation**.  
+**HAVING** filters rows **after aggregation**.
+
+### **Q2. Difference between UNION and UNION ALL?**
+- **UNION** removes duplicates.  
+- **UNION ALL** keeps duplicates (faster).
+
+### **Q3. What is a Primary Key?**
+- Uniquely identifies each row.  
+- Cannot contain NULL.  
+- One per table.
+
+### **Q4. Primary Key vs Unique Key**
+| Feature | Primary Key | Unique Key |
+|---------|--------------|-------------|
+| Null allowed | ❌ No | ✔ Yes (only one) |
+| Count | 1 per table | Many per table |
+
+### **Q5. What is Normalization?**
+A process to reduce redundancy and improve data integrity.
+
+### **Q6. What is a Window Function?**
+Calculations across rows **without reducing** results.
+
+```sql
+SELECT emp_id, salary,
+RANK() OVER (ORDER BY salary DESC) AS rank
+FROM emp;
+```
+
+### **Q7. DELETE vs TRUNCATE vs DROP**
+| Command | What it Removes | Rollback? |
+|---------|------------------|-----------|
+| DELETE | Rows | ✔ Yes |
+| TRUNCATE | All rows | ❌ No |
+| DROP | Table | ❌ No |
+
+### **Q8. What is ACID?**
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+
+### **Q9. What is a Foreign Key?**
+Ensures **referential integrity** between tables.
+
+### **Q10. CHAR vs VARCHAR**
+| CHAR | VARCHAR |
+|------|----------|
+| Fixed length | Variable length |
+| Faster | Slower |
+| Uses full allocated space | Uses actual space |
+
+---
+
+## Advanced SQL Concepts
+
+### ACID Properties
+**ACID** ensures reliable database transactions:
+- **Atomicity** – A transaction is all‑or‑nothing. If one part fails, the entire transaction rolls back.
+- **Consistency** – Ensures the database moves from one valid state to another.
+- **Isolation** – Transactions execute independently without interfering.
+- **Durability** – Once committed, data is permanently saved even during failures.
+
+**ACID Transaction Flow Diagram:**
+```
+[START] → [BEGIN TRANSACTION]
+       → [EXECUTE OPERATIONS]
+       → (Success?) — Yes → [COMMIT] → [END]
+                      └ No → [ROLLBACK] → [END]
+```
+
+---
+
+### Normalization
+Normalization reduces redundancy and improves data integrity.
+
+#### **1NF (First Normal Form)**
+- No repeating groups
+- Each cell holds a single value
+
+#### **2NF (Second Normal Form)**
+- Must be in 1NF
+- No partial dependency on a composite primary key
+
+#### **3NF (Third Normal Form)**
+- Must be in 2NF
+- No transitive dependency (non‑key depending on another non‑key)
+
+**Normalization Visual Example:**
+```
+UNNORMALIZED:
+OrderID | Customer | CustomerCity | Product | Qty
+
+NORMALIZED:
+CUSTOMER: CustomerID | Name | City
+ORDER: OrderID | CustomerID | Date
+ORDER_ITEMS: OrderID | ProductID | Qty
+```
+
+---
+
+### Indexing
+Indexes speed up read queries by creating a fast lookup structure.
+
+#### Types of Indexes
+- **B‑Tree Index** – Default for most DBs, ideal for ranges
+- **Hash Index** – Fast equality lookups
+- **Composite Index** – Multiple columns
+- **Unique Index** – Ensures no duplicates
+- **Full‑Text Index** – For searching large text fields
+
+**Index Lookup Diagram:**
+```
+          [Root]
+           /  \
+      [Node] [Node]
+        /        \
+ [Leaf Pages]   [Leaf Pages]
+```
+
+**When NOT to use indexes:**
+- On very small tables
+- Columns with high write operations
+- Columns with high repetition (Boolean fields)
+
+---
+
+### Views
+A **View** is a virtual table based on a SQL query.
+
+#### Advantages
+- Simplifies complex queries
+- Provides security (hide sensitive columns)
+- Helps create reusable components
+
+#### Types
+- **Simple View** – One table
+- **Complex View** – Multiple tables and joins
+- **Materialized View** – Stores actual data for fast reads
+
+---
+
+### Sharding
+Sharding splits large databases horizontally across multiple servers.
+
+**Types of Sharding:**
+- **Range Sharding** (based on value ranges)
+- **Hash Sharding** (hash function distributes data)
+- **Geo Sharding** (region‑based)
+- **Directory Sharding** (lookup table decides shard)
+
+**Sharding Architecture Diagram:**
+```
+                   ┌────────────┐
+                   │  App/API   │
+                   └─────┬──────┘
+                         │
+                  ┌──────┴────────┐
+                  │  Shard Router │
+                  └──────┬────────┘
+         ┌───────────────┼────────────────┬───────────────┐
+         │               │                │               │
+ ┌────────────┐   ┌────────────┐   ┌────────────┐   ┌────────────┐
+ │ Shard 1    │   │ Shard 2    │   │ Shard 3    │   │ Shard 4    │
+ └────────────┘   └────────────┘   └────────────┘   └────────────┘
+```
+
+**When to Use Sharding:**
+- Extremely large datasets (TB‑PB scale)
+- High throughput applications
+- Geo‑distributed systems
+
+---
+
