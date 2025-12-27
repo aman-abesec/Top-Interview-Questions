@@ -290,29 +290,3 @@ const app = new App(new MongoDB());
 * **SDKs / Libraries**: Stable public APIs
 
 ---
-
-## 📂 Recommended Project Structure
-
-```
-src/
- ├── services/
- ├── repositories/
- ├── strategies/
- ├── interfaces/
- └── app.js
-```
-
----
-
-## 📘 References
-
-* Clean Architecture – Robert C. Martin
-* Refactoring Guru
-
----
-
-## 🧑‍💻 Author
-
-**Aman Singh**
-
-⭐ If this helped you, consider starring the repo!
